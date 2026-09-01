@@ -1,215 +1,537 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bhavani Chilukoti - Portfolio</title>
-    <link rel="stylesheet" href="Style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bhavani Chilukoti — Software Engineer</title>
+<meta name="description" content="Bhavani Chilukoti — Software Engineer building frontend architecture, animation systems and real-time applications with React, .NET, Blazor and Svelte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#12141A;
+    --panel:#181B23;
+    --panel-2:#1E212B;
+    --line:#2B2F3B;
+    --text:#EDEEF2;
+    --text-muted:#8B909C;
+    --accent:#5EE6C6;
+    --accent-soft:#5EE6C633;
+    --accent-warm:#F2B84B;
+    --maxw:1120px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk',system-ui,sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    line-height:1.15;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  ul{list-style:none;}
+  section{padding:96px 24px;}
+  .wrap{max-width:var(--maxw);margin:0 auto;}
+  .prose{max-width:640px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;scroll-behavior:auto !important;}
+  }
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(18,20,26,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:var(--maxw);margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 24px;
+  }
+  .mark{
+    font-family:'Space Grotesk';font-weight:700;font-size:1.05rem;
+    display:flex;align-items:center;gap:10px;
+  }
+  .mark-dot{
+    width:10px;height:10px;border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 3px var(--accent-soft);
+  }
+  .nav-links{display:flex;gap:32px;}
+  .nav-links a{
+    font-size:0.92rem;color:var(--text-muted);
+    padding:4px 2px;border-bottom:1px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  .nav-links a:hover, .nav-links a.active{color:var(--text);border-color:var(--accent);}
+  .nav-toggle{display:none;background:none;border:1px solid var(--line);border-radius:6px;color:var(--text);padding:8px 10px;font-size:1rem;}
+
+  @media (max-width:760px){
+    .nav-links{
+      position:fixed;inset:64px 0 auto 0;
+      background:var(--panel);
+      flex-direction:column;gap:0;
+      border-bottom:1px solid var(--line);
+      transform:translateY(-8px);opacity:0;pointer-events:none;
+      transition:transform .18s ease, opacity .18s ease;
+    }
+    .nav-links.open{transform:translateY(0);opacity:1;pointer-events:auto;}
+    .nav-links a{padding:16px 24px;border-bottom:1px solid var(--line);width:100%;}
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{padding:88px 24px 0;}
+  .hero-grid{
+    max-width:var(--maxw);margin:0 auto;
+    display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:center;
+  }
+  .eyebrow-role{
+    display:inline-flex;align-items:center;gap:8px;
+    color:var(--accent);font-size:0.95rem;font-weight:500;
+    margin-bottom:18px;
+  }
+  .hero h1{font-size:clamp(2.4rem,5vw,3.6rem);}
+  .hero p.tagline{
+    color:var(--text-muted);font-size:1.08rem;max-width:520px;margin-top:20px;
+  }
+  .hero-cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .btn{
+    font-family:'Inter';font-weight:600;font-size:0.92rem;
+    padding:12px 22px;border-radius:999px;
+    border:1px solid var(--line);
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .btn-primary{background:var(--accent);color:#0B1310;border-color:var(--accent);}
+  .btn-primary:hover{background:#79eeD4;}
+  .btn-ghost{color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent);}
+
+  .hero-panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:28px;
+    position:relative;
+  }
+  .hero-panel .kf-label{font-size:0.8rem;color:var(--text-muted);margin-bottom:14px;}
+  .hero-monogram{
+    width:64px;height:64px;
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk';font-weight:700;font-size:1.4rem;color:var(--accent);
+    margin-bottom:18px;
+  }
+  .hero-panel .stat-row{display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line);font-size:0.9rem;}
+  .hero-panel .stat-row span:first-child{color:var(--text-muted);}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Career timeline (signature element) ---------- */
+  .timeline-strip{padding:56px 24px 8px;}
+  .timeline-track{
+    max-width:var(--maxw);margin:0 auto;
+    position:relative;
+    display:flex;justify-content:space-between;
+    padding-top:6px;
+  }
+  .timeline-track::before{
+    content:"";position:absolute;top:5px;left:0;right:0;height:1px;
+    background:var(--line);
+  }
+  .timeline-track .tick{
+    position:relative;flex:1;text-align:left;padding-left:0;
+    cursor:pointer;background:none;border:none;color:inherit;font:inherit;
+  }
+  .timeline-track .tick::before{
+    content:"";position:absolute;top:0;left:0;width:11px;height:11px;
+    border-radius:50%;background:var(--panel);border:2px solid var(--line);
+    transform:translate(-50%,0);
+  }
+  .timeline-track .tick.is-now::before{border-color:var(--accent);background:var(--accent);}
+  .tick .tk-year{display:block;font-size:0.8rem;color:var(--text-muted);margin-top:16px;}
+  .tick .tk-label{display:block;font-size:0.92rem;font-weight:500;margin-top:2px;}
+  .tick:hover .tk-label{color:var(--accent);}
+
+  @media (max-width:700px){
+    .timeline-track{flex-direction:column;gap:22px;}
+    .timeline-track::before{display:none;}
+    .timeline-track .tick::before{transform:translate(0,4px);}
+    .tick{padding-left:22px;}
+    .tk-year{margin-top:0 !important;}
+  }
+
+  /* ---------- Section heads ---------- */
+  .section-head{margin-bottom:44px;}
+  .section-head h2{font-size:1.9rem;}
+  .section-head p{color:var(--text-muted);margin-top:10px;max-width:560px;}
+
+  /* ---------- About ---------- */
+  #about .prose p{color:var(--text-muted);font-size:1.05rem;}
+  #about .prose p + p{margin-top:16px;}
+
+  /* ---------- Skills (layers panel) ---------- */
+  .layers{border-top:1px solid var(--line);}
+  .layer-row{
+    display:grid;grid-template-columns:200px 1fr;gap:24px;
+    padding:22px 0;border-bottom:1px solid var(--line);
+    align-items:baseline;
+  }
+  .layer-row h3{font-size:1rem;color:var(--text);}
+  .layer-row .tags{display:flex;flex-wrap:wrap;gap:10px;}
+  .tag{
+    font-size:0.86rem;padding:7px 14px;border-radius:999px;
+    border:1px solid var(--line);color:var(--text-muted);
+  }
+  .tag.core{border-color:var(--accent);color:var(--accent);}
+  @media (max-width:700px){
+    .layer-row{grid-template-columns:1fr;gap:10px;}
+  }
+
+  /* ---------- Experience ---------- */
+  .role-card{
+    border:1px solid var(--line);background:var(--panel);
+    padding:32px;
+  }
+  .role-head{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:18px;}
+  .role-head h3{font-size:1.25rem;}
+  .role-head .role-org{color:var(--accent);font-size:0.98rem;margin-top:4px;}
+  .role-head .role-when{color:var(--text-muted);font-size:0.9rem;white-space:nowrap;}
+  .role-card ul{display:grid;gap:12px;}
+  .role-card li{
+    color:var(--text-muted);font-size:0.98rem;
+    padding-left:18px;position:relative;
+  }
+  .role-card li::before{
+    content:"";position:absolute;left:0;top:9px;width:6px;height:6px;background:var(--accent);
+  }
+
+  /* ---------- Projects ---------- */
+  .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .project-card{
+    border:1px solid var(--line);background:var(--panel);
+    padding:28px;display:flex;flex-direction:column;
+  }
+  .project-card .stack{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 16px;}
+  .project-card h3{font-size:1.15rem;margin-bottom:6px;}
+  .project-card p.desc{color:var(--text-muted);font-size:0.95rem;margin-bottom:14px;}
+  .project-card ul{display:grid;gap:8px;margin-bottom:20px;flex:1;}
+  .project-card li{color:var(--text-muted);font-size:0.92rem;padding-left:16px;position:relative;}
+  .project-card li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;background:var(--accent-warm);}
+  .project-links{display:flex;gap:16px;margin-top:auto;}
+  .project-links a{font-size:0.9rem;font-weight:600;color:var(--accent);border-bottom:1px solid transparent;}
+  .project-links a:hover{border-color:var(--accent);}
+  @media (max-width:760px){.projects-grid{grid-template-columns:1fr;}}
+
+  /* ---------- Credentials ---------- */
+  .cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
+  .cred-grid h3{font-size:1.05rem;margin-bottom:16px;}
+  .cred-grid .edu-item{border-top:1px solid var(--line);padding-top:16px;}
+  .cred-grid .edu-item .edu-degree{font-weight:500;}
+  .cred-grid .edu-item .edu-meta{color:var(--text-muted);font-size:0.9rem;margin-top:4px;}
+  .cert-list{display:grid;gap:12px;}
+  .cert-list li{
+    border-top:1px solid var(--line);padding-top:12px;
+    color:var(--text-muted);font-size:0.95rem;
+    display:flex;justify-content:space-between;gap:12px;
+  }
+  .cert-list li span:first-child{color:var(--text);}
+  @media (max-width:700px){.cred-grid{grid-template-columns:1fr;gap:32px;}}
+
+  /* ---------- Contact ---------- */
+  #contact{border-top:1px solid var(--line);}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+  .contact-list{display:grid;gap:14px;}
+  .contact-list a{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:16px 0;border-bottom:1px solid var(--line);
+    font-size:0.98rem;
+  }
+  .contact-list a span:first-child{color:var(--text-muted);}
+  .contact-list a:hover span:last-child{color:var(--accent);}
+  @media (max-width:700px){.contact-grid{grid-template-columns:1fr;}}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:28px 24px;color:var(--text-muted);font-size:0.85rem;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+  }
+</style>
 </head>
 <body>
-    <canvas id="particle-canvas"></canvas>
-    <header>
-        <nav>
-            <ul>
-                
-                <li class="nav-item-2"><a href="#about">About</a></li>
-                <li class="nav-item-3"><a href="#skills">Skills</a></li>
-                <li class="nav-item-3"><a href="#experience">Experience</a></li>
-                <li class="nav-item-4"><a href="#projects">Projects</a></li>
-                <li class="nav-item-5"><a href="#contact">Contact</a></li>
-            </ul>
-        </nav> 
-    </header>
-    <main>
-        <main>
-            <section class="hero-section">
-                <div class="hero-content">
-                    <h1>Bhavani Chilukoti</h1>
-                    <h4><span class="highlight">Final year | Software Engineer Intern</span></h2>
-                    <p class="fade-in">As an aspiring software engineer 🎓, Passionate about harnessing <br>technology to create innovative solutions💡.</p>   
-                        <div class="header-icons">
-                            <a href="https://github.com/chilukotibhavani" target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/bhavani-chilukoti-80124a293/" target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="https://linktr.ee/bhavani_ch" target="_blank" rel="noopener noreferrer">
-                                <i class="fas fa-link"></i>
-                            </a>
-                        </div>
-                </div>
-                <div class="hero-image">
-                    <img src="images/Bhavani.png" alt="Bhavani Chilukoti">
-                </div>
-            </section>
-           
-            <section id="about" class="section">
-                <h1 class="fade-in">About Me</h1>                
-                <p class="fade-in">👋 Hello! I am currently pursuing my education at Chalapathi Institute of Technology .<br>          <br>As an aspiring software engineer with a passion for innovation , I'm on an exciting journey to shape the future of technology. Currently interning at Wise Work .I'm honing my skills in .NET ,Blazor, C# , MudBlazor,while also expanding my expertise in Web development ,Java , Python, Data structures .Driven by curiosity and a desire to push boundaries, I combine technical proficiency with creative problem-solving to develop impactful solutions. My goal is to leverage technology to address both current and future challenges, continuously learning and evolving in this dynamic field.</p>               
-            </section>
 
-            <section id="skills" class="section">
-                <h1 class="fade-in">Skills</h1>
-                <div class="skills-container">
-                    <div class="skill-box fade-in-skill" data-skill-order="1">
-                        <h3>Languages</h3>
-                        <ul>
-                            <li><i class="fab fa-java"></i> Java</li>
-                            <li><i class="fab fa-python"></i> Python</li>
-                            <li><i class="fas fa-code"></i> C#</li>
-                            <li><i class="fas fa-project-diagram"></i> DSA</li>
-                        </ul>
-                    </div>
-                    <div class="skill-box fade-in-skill" data-skill-order="2">
-                        <h3>Frontend</h3>
-                        <ul>
-                            <li><i class="fab fa-html5"></i> HTML</li>
-                            <li><i class="fab fa-css3-alt"></i> CSS</li>
-                            <li><i class="fab fa-js-square"></i> JavaScript</li>
-                            <li><i class="fas fa-fire"></i> MudBlazor</li>
-                        </ul>
-                    </div>
-                    <div class="skill-box fade-in-skill" data-skill-order="3">
-                        <h3>Backend</h3>
-                        <ul>
-                            <li><i class="fab fa-microsoft"></i> ASP.NET</li>
-                            <li><i class="fas fa-database"></i> SQL</li>
-                            <li><i class="fas fa-leaf"></i> MongoDB</li>
-                        </ul>
-                    </div>
-                    <div class="skill-box fade-in-skill" data-skill-order="4">
-                        <h3>Tools</h3>
-                        <ul>
-                            <li><i class="fas fa-code-branch"></i> Visual Studio</li>
-                            <li><i class="fab fa-github"></i> GitHub</li>
-                            <li><i class="fas fa-code"></i> Visual Studio Code</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-    
-            <section id="experience" class="section">
-                <h1 class="fade-in">Experience</h1>
-                <div class="experience-item stagger-item">
-                    <h3>Software Engineer Intern At Wise Work | 🎓Final Year </h3>
-                    <p><em>June 2024 - Present </em></p>
-                    <h4>Hue Animates Slide – Hue Learn</h4>
-                    <ul>
-                        <li>Interactive UI Development: Implemented drag-and-drop functionality for keywords, enhancing user engagement and learning interactivity.</li>
-                        <li>User Satisfaction: Contributed to a 40% increase in overall user retention through improved slide interactivity and visual enhancements.</li>
-                        <li>SVG Integration: Designed and incorporated SVG icons to improve visual appeal and user experience, resulting in a 30% increase in positive user feedback.</li>                     
-                    </ul>
-                </div>    
-            </section>
-    
-            <section id="projects" class="section">
-                <h1 class="fade-in">Projects</h1>
-                <div class="project-buttons fade-in-stagger">
-                    <button class="project-button active" data-project="weather">Weather Prediction</button>
-                    <button class="project-button" data-project="netflix">Netflix Clone</button>
-                    <button class="project-button" data-project="sudoku">Sudoku Solver</button>
-                </div>
-    
-                    <div id="weatherProject" class="project-details active">
-                        <div class="project-content">
-                            <div class="project-image-container">
-                                <img src="images/Weather.png" alt="Weather Prediction Project" class="project-image">
-                            </div> 
-                            <div class="project-text">
-                                <h3>Weather Prediction</h3>
-                                <p><em>Jan 2024 - Feb 2024</em></p>
-                                <ul>
-                                    <li class="project-point">Dynamic Weather Application: Created a robust weather prediction website using Blazor and ASP.NET, providing real-time weather updates for over 1000 global locations.</li>
-                                    <li class="project-point">API Integration: Successfully integrated external weather APIs, achieving 98% accuracy in weather forecasts and reducing data retrieval time by 40%.</li>
-                                    <li class="project-point">Interactive User Experience: Implemented interactive UI components with Blazor, resulting in a 50% increase in user engagement and time spent on the website.</li>
-                                </ul>
-                                <a href="https://github.com/chilukotibhavani/Bharat_Intern/tree/main/WeatherWeb" target="_blank" class="github-button">View on GitHub</a>                    
-                            </div>
-                        </div>
-                    </div>
-                
-        
-                    <div id="netflixProject" class="project-details">
-                        <div class="project-content">
-                            <div class="project-image-container">
-                                <img src="images/Netflix.png" alt="Netflix Clone Project" class="project-image">
-                            </div>                      
-                            <div class="project-text">
-                                <h3>Netflix Clone</h3>
-                                <p><em>Jan 2024 - Feb 2024</em></p>
-                                <ul> 
-                                    <li class="project-point">User Interface Replication: Developed a responsive Netflix clone using HTML and CSS, accurately recreating 90% of the original Netflix UI elements and layout.<li>                             
-                                    <li class="project-point">Responsive Design Implementation: Engineered a fully responsive design, ensuring seamless viewing experience across devices and increasing mobile user engagement by 35%.</li>
-                                    <li class="project-point">Performance Optimization: Implemented efficient CSS techniques, reducing the page load time by 20% and improving overall user experience.</li>
-                                </ul>
-                                <a href="https://github.com/chilukotibhavani/Bharat_Intern/blob/main/index.html" target="_blank" class="github-button">View on GitHub</a>
-                            </div> 
-                        </div>
-                    </div>
-            
-                    <div id="sudokuProject" class="project-details">
-                        <div class="project-content">
-                            <div class="project-image-container">
-                                <img src="images/Sudoku.jpg" alt="Sudoku Solver Project" class="project-image">
-                            </div>  
-                            <div class="project-text">
-                                <h3>Sudoku Solver – Fun Friday Activity</h3>
-                                <p><em>July 2024 - Aug 2024</em></p>
-                                <ul>
-                                    <li class="project-point">Multiplayer Functionality: Implemented both individual and room-based gameplay using SignalR and RoomHub, enabling real-time multiplayer interactions.</li>
-                                    <li class="project-point">Real-time Communication: Utilized SignalR to create seamless, real-time updates for game state, scores, and player actions across all connected clients.</li>
-                                    <li class="project-point">Game Logic Implementation: Developed core Sudoku game mechanics, including a "New Game" generator and "Solution" revealer, enhancing user experience and gameplay options.</li>
-                                </ul>
-                                <a href="https://github.com/chilukotibhavani/Sudoku" target="_blank" class="github-button">View on GitHub</a>  
-                                <a href="https://landing-services-dev.azurewebsites.net/Home" target="_blank" class="lets-play-button">Let's Play</a>
-                            </div>
-                        </div>
-                    </div>
-                
-            </section>
-    
-            <section id="contact" class="section">
-                <h1 class="fade-in">Contact Me</h1>
-                <div class="content-wrapper stagger-item">
-                    <div class="contact-container">
-                        <div class="contact-info">
-                            <div class="social-icons">
-                                <a href="mailto:bhavanichilukoti43@gmail.com" class="icon-button" data-tooltip="bhavanichilukoti43@gmail.com">
-                                    <i class="fas fa-envelope"></i>
-                                </a>
-                                <a href="https://www.linkedin.com/in/bhavani-chilukoti-80124a293/" target="_blank" class="icon-button"  data-tooltip="Bhavani Chilukoti">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                                <a href="https://github.com/chilukotibhavani" target="_blank" class="icon-button" data-tooltip="chilukotibhavani">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                                <a href="https://linktr.ee/bhavani_ch" target="_blank" class="icon-button" data-tooltip="bhavani_ch">
-                                    <i class="fas fa-link"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <form id="contactForm" class="contact-form">
-                            <input type="text" id="name" name="name" placeholder="Your name" required>
-                            <input type="email" id="email" name="email" placeholder="Your email" required>
-                            <textarea id="message" name="message" placeholder="Your message" required></textarea>
-                            <button type="submit">Send Message</button>
-                        </form>
-                    </div>
-                </div>
-            </section>
-            
+<header>
+  <nav>
+    <div class="mark"><span class="mark-dot"></span>Bhavani Chilukoti</div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#credentials">Credentials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow-role">Associate Software Engineer, Wise Work — Hue Learn</div>
+        <h1>I build the frontend architecture behind interactive learning products.</h1>
+        <p class="tagline">React, .NET, Blazor and Svelte 5 — from timeline-based animation editors to real-time, config-driven classroom games.</p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">See the projects</a>
+          <a href="#contact" class="btn btn-ghost">Get in touch</a>
         </div>
+      </div>
+      <div class="hero-panel">
+        <div class="hero-monogram">BC</div>
+        <div class="kf-label">Currently building</div>
+        <div class="stat-row"><span>Focus</span><span>Frontend architecture</span></div>
+        <div class="stat-row"><span>Stack</span><span>React · TypeScript · Svelte 5</span></div>
+        <div class="stat-row"><span>Based in</span><span>Bengaluru, India</span></div>
+      </div>
+    </div>
+  </section>
 
-        </main>
-    </main>
-    <footer>
-        <p>&copy; 2024 Bhavani Chilukoti. All rights reserved.</p>
-    </footer>
-    <script src="particles.js"></script>
-    <script src="scroll-animation.js"></script>
-    <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <section class="timeline-strip">
+    <div class="timeline-track">
+      <button class="tick" data-target="#credentials"><span class="tk-year">2021–25</span><span class="tk-label">B.Tech, CSE</span></button>
+      <button class="tick" data-target="#experience"><span class="tk-year">Jun 2024</span><span class="tk-label">Software Engineer Intern</span></button>
+      <button class="tick is-now" data-target="#experience"><span class="tk-year">Jun 2025</span><span class="tk-label">Associate Software Engineer</span></button>
+      <button class="tick" data-target="#projects"><span class="tk-year">Ongoing</span><span class="tk-label">Griffins Store &amp; Sudoku Solver</span></button>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>About</h2>
+      </div>
+      <div class="prose">
+        <p>I'm a software engineer working across React, .NET, ASP.NET, Blazor, Svelte 5, TypeScript and SQL, building scalable full-stack applications and interactive learning platforms.</p>
+        <p>Most of my recent work sits at the intersection of frontend architecture and real-time systems: migrating C#-based applications to React, building a timeline-based animation editor, and shipping config-driven classroom games that run inside an iframe-embedded host application.</p>
+        <p>I care about reusable components, clean architecture and end-to-end delivery — taking a feature from a Figma frame through to a shipped, performant interface.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Skills</h2>
+        <p>Grouped the way I actually reach for them — languages, frameworks, data, tooling and the areas I focus on.</p>
+      </div>
+      <div class="layers">
+        <div class="layer-row">
+          <h3>Languages</h3>
+          <div class="tags">
+            <span class="tag">C#</span><span class="tag">Java</span><span class="tag">JavaScript</span>
+            <span class="tag">TypeScript</span><span class="tag">SQL</span><span class="tag">HTML5</span><span class="tag">CSS</span>
+          </div>
+        </div>
+        <div class="layer-row">
+          <h3>Frameworks &amp; tech</h3>
+          <div class="tags">
+            <span class="tag">React</span><span class="tag">.NET</span><span class="tag">ASP.NET</span>
+            <span class="tag">ASP.NET Web API</span><span class="tag">Blazor</span><span class="tag">Svelte 5</span>
+            <span class="tag">SvelteKit</span><span class="tag">.NET MAUI</span><span class="tag">Vite</span>
+            <span class="tag">MudBlazor</span><span class="tag">Radzen</span><span class="tag">SignalR</span>
+          </div>
+        </div>
+        <div class="layer-row">
+          <h3>Databases</h3>
+          <div class="tags">
+            <span class="tag">MongoDB</span><span class="tag">SQL Server</span><span class="tag">Supabase</span>
+          </div>
+        </div>
+        <div class="layer-row">
+          <h3>Tools</h3>
+          <div class="tags">
+            <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Visual Studio</span>
+            <span class="tag">VS Code</span><span class="tag">Postman</span>
+          </div>
+        </div>
+        <div class="layer-row">
+          <h3>Design</h3>
+          <div class="tags">
+            <span class="tag">Figma</span><span class="tag">Canva</span>
+          </div>
+        </div>
+        <div class="layer-row">
+          <h3>Core areas</h3>
+          <div class="tags">
+            <span class="tag core">Full-stack development</span>
+            <span class="tag core">Frontend architecture</span>
+            <span class="tag core">Responsive UI</span>
+            <span class="tag core">Android development</span>
+            <span class="tag core">Real-time applications</span>
+            <span class="tag core">UI/UX</span>
+            <span class="tag core">API integration</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Experience</h2>
+      </div>
+      <div class="role-card">
+        <div class="role-head">
+          <div>
+            <h3>Associate Software Engineer</h3>
+            <div class="role-org">Wise Work — Hue Learn, Bengaluru</div>
+          </div>
+          <div class="role-when">June 2025 — Present</div>
+        </div>
+        <ul>
+          <li>Contributed to the migration of Hue Create and Hue Play from C#-based applications to React, building scalable, responsive frontend components and workflows in React and TypeScript.</li>
+          <li>Engineered an animated slide editor for Hue Create with drag-and-drop, multi-selection, layer management, timeline-based animations, SVG integration, custom effects and undo/redo.</li>
+          <li>Built a custom timeline-based animation system supporting rotation, spin-in, flicker and synchronized animation control across multiple slide elements.</li>
+          <li>Developed config-driven interactive classroom games with Svelte 5 (Runes), TypeScript and JSON-based configuration, so game logic, difficulty and scoring can be reused across variants.</li>
+          <li>Implemented parent-child iframe communication with postMessage for lifecycle management and structured progress/result data exchange between Hue Games and the host application.</li>
+          <li>Integrated Supabase-backed game configuration and content management, mapping game catalogs to difficulty tiers and gameplay parameters to support new variants without extra deployments.</li>
+          <li>Optimized Hue Play for Android and responsive web, implementing mobile-first layouts, navigation, authentication flows and full-screen learning experiences.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Projects</h2>
+        <p>A couple of things I built outside of work to explore ideas end to end.</p>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3>Griffins Store</h3>
+          <p class="desc">E-commerce platform</p>
+          <div class="stack">
+            <span class="tag">Blazor</span><span class="tag">ASP.NET</span><span class="tag">GSAP</span>
+          </div>
+          <ul>
+            <li>Responsive e-commerce web app with dynamic product listings, category-based browsing and responsive layouts.</li>
+            <li>Add-to-cart with real-time UI updates, plus GSAP animation across desktop and mobile.</li>
+          </ul>
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener">View code</a>
+          </div>
+        </div>
+        <div class="project-card">
+          <h3>Sudoku Solver</h3>
+          <p class="desc">Fun Friday activity</p>
+          <div class="stack">
+            <span class="tag">C#</span><span class="tag">MudBlazor</span><span class="tag">.NET</span><span class="tag">SignalR</span>
+          </div>
+          <ul>
+            <li>Full-stack Sudoku app with single-player and real-time multiplayer modes using SignalR and RoomHub.</li>
+            <li>Dynamic puzzle generation, solution reveal and real-time state sync for room-based multiplayer.</li>
+          </ul>
+          <div class="project-links">
+            <a href="https://github.com/chilukotibhavani/Sudoku" target="_blank" rel="noopener">View code</a>
+            <a href="https://landing-services-dev.azurewebsites.net/Home" target="_blank" rel="noopener">Play it</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="credentials">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Credentials</h2>
+      </div>
+      <div class="cred-grid">
+        <div>
+          <h3>Education</h3>
+          <div class="edu-item">
+            <div class="edu-degree">Bachelor of Technology, Computer Science and Engineering</div>
+            <div class="edu-meta">Chalapathi Institute of Technology · Nov 2021 — May 2025 · CGPA 8.0</div>
+          </div>
+        </div>
+        <div>
+          <h3>Certifications</h3>
+          <ul class="cert-list">
+            <li><span>Salesforce Developer</span><span>Smart Internz</span></li>
+            <li><span>Programming in Java</span><span>NPTEL</span></li>
+            <li><span>JavaScript Certification</span><span>Infosys Springboard</span></li>
+            <li><span>Cloud Computing</span><span>NPTEL</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Contact</h2>
+        <p>Open to conversations about frontend engineering, real-time systems and interactive product work.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-list">
+          <a href="mailto:bhavanichilukoti43@gmail.com"><span>Email</span><span>bhavanichilukoti43@gmail.com</span></a>
+          <a href="tel:+917842611309"><span>Phone</span><span>+91 78426 11309</span></a>
+          <a href="https://www.linkedin.com/in/bhavani-chilukoti-80124a293/" target="_blank" rel="noopener"><span>LinkedIn</span><span>bhavani-chilukoti</span></a>
+          <a href="https://github.com/chilukotibhavani" target="_blank" rel="noopener"><span>GitHub</span><span>chilukotibhavani</span></a>
+          <a href="https://linktr.ee/bhavani_ch" target="_blank" rel="noopener"><span>Linktree</span><span>bhavani_ch</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2026 Bhavani Chilukoti</span>
+  <span>Built with React, .NET &amp; Blazor in mind</span>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  document.querySelectorAll('.tick').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelector(t.dataset.target)?.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  const sections = document.querySelectorAll('main section[id]');
+  const navA = document.querySelectorAll('.nav-links a');
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting){
+        navA.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+      }
+    });
+  }, {rootMargin:'-45% 0px -50% 0px'});
+  sections.forEach(s => spy.observe(s));
+</script>
+
 </body>
 </html>
