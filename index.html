@@ -183,6 +183,14 @@
   /* ---------- About ---------- */
   #about .prose p{color:var(--text-muted);font-size:1.05rem;}
   #about .prose p + p{margin-top:16px;}
+  .about-grid{display:grid;grid-template-columns:1fr 320px;gap:56px;align-items:start;}
+  .about-panel{border:1px solid var(--line);background:var(--panel);padding:26px;}
+  .about-panel h4{font-size:0.95rem;margin-bottom:18px;}
+  .about-panel .focus-item{padding:14px 0;border-top:1px solid var(--line);}
+  .about-panel .focus-item:first-of-type{border-top:none;}
+  .about-panel .focus-item .fi-title{font-size:0.94rem;font-weight:500;}
+  .about-panel .focus-item .fi-sub{font-size:0.85rem;color:var(--text-muted);margin-top:3px;}
+  @media (max-width:860px){.about-grid{grid-template-columns:1fr;}}
 
   /* ---------- Skills (layers panel) ---------- */
   .layers{border-top:1px solid var(--line);}
@@ -316,8 +324,7 @@
     <div class="timeline-track">
       <button class="tick" data-target="#credentials"><span class="tk-year">2021–25</span><span class="tk-label">B.Tech, CSE</span></button>
       <button class="tick" data-target="#experience"><span class="tk-year">Jun 2024</span><span class="tk-label">Software Engineer Intern</span></button>
-      <button class="tick is-now" data-target="#experience"><span class="tk-year">Jun 2025</span><span class="tk-label">Associate Software Engineer</span></button>
-      <button class="tick" data-target="#projects"><span class="tk-year">Ongoing</span><span class="tk-label">Griffins Store &amp; Sudoku Solver</span></button>
+      <button class="tick is-now" data-target="#experience"><span class="tk-year">Jun 2025 — Present</span><span class="tk-label">Associate Software Engineer</span></button>
     </div>
   </section>
 
@@ -326,10 +333,31 @@
       <div class="section-head">
         <h2>About</h2>
       </div>
-      <div class="prose">
-        <p>I'm a software engineer working across React, .NET, ASP.NET, Blazor, Svelte 5, TypeScript and SQL, building scalable full-stack applications and interactive learning platforms.</p>
-        <p>Most of my recent work sits at the intersection of frontend architecture and real-time systems: migrating C#-based applications to React, building a timeline-based animation editor, and shipping config-driven classroom games that run inside an iframe-embedded host application.</p>
-        <p>I care about reusable components, clean architecture and end-to-end delivery — taking a feature from a Figma frame through to a shipped, performant interface.</p>
+      <div class="about-grid">
+        <div class="prose">
+          <p>I'm a software engineer working across React, .NET, ASP.NET, Blazor, Svelte 5, TypeScript and SQL, building scalable full-stack applications and interactive learning platforms.</p>
+          <p>Most of my recent work sits at the intersection of frontend architecture and real-time systems: migrating C#-based applications to React, building a timeline-based animation editor, and shipping config-driven classroom games that run inside an iframe-embedded host application.</p>
+          <p>I care about reusable components, clean architecture and end-to-end delivery — taking a feature from a Figma frame through to a shipped, performant interface.</p>
+        </div>
+        <div class="about-panel">
+          <h4>Where I spend my time</h4>
+          <div class="focus-item">
+            <div class="fi-title">Frontend architecture</div>
+            <div class="fi-sub">React &amp; TypeScript migrations, reusable component systems</div>
+          </div>
+          <div class="focus-item">
+            <div class="fi-title">Animation systems</div>
+            <div class="fi-sub">Timeline-based editors, layer management, SVG</div>
+          </div>
+          <div class="focus-item">
+            <div class="fi-title">Real-time &amp; config-driven apps</div>
+            <div class="fi-sub">Svelte 5, SignalR, Supabase-backed content</div>
+          </div>
+          <div class="focus-item">
+            <div class="fi-title">Cross-platform delivery</div>
+            <div class="fi-sub">.NET MAUI, Android, responsive web</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -436,7 +464,7 @@
             <li>Add-to-cart with real-time UI updates, plus GSAP animation across desktop and mobile.</li>
           </ul>
           <div class="project-links">
-            <a href="#" target="_blank" rel="noopener">View code</a>
+            <a href="https://github.com/chilukotibhavani/GriffinsStores" target="_blank" rel="noopener">View code</a>
           </div>
         </div>
         <div class="project-card">
@@ -496,6 +524,7 @@
           <a href="tel:+917842611309"><span>Phone</span><span>+91 78426 11309</span></a>
           <a href="https://www.linkedin.com/in/bhavani-chilukoti-80124a293/" target="_blank" rel="noopener"><span>LinkedIn</span><span>bhavani-chilukoti</span></a>
           <a href="https://github.com/chilukotibhavani" target="_blank" rel="noopener"><span>GitHub</span><span>chilukotibhavani</span></a>
+          <a href="https://chilukotibhavani.github.io/My_Portfolio/" target="_blank" rel="noopener"><span>Website</span><span>chilukotibhavani.github.io</span></a>
           <a href="https://linktr.ee/bhavani_ch" target="_blank" rel="noopener"><span>Linktree</span><span>bhavani_ch</span></a>
         </div>
       </div>
